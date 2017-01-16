@@ -222,31 +222,102 @@ csOutput = document.getElementById("csoutput")
 
 # Funtions
 
-helloFunc = (name) ->
-   return "Hello #{name}"
-csOutput.insertAdjacentHTML('beforeend', "#{helloFunc("Erik")}<br>")
+# helloFunc = (name) ->
+#    return "Hello #{name}"
+# csOutput.insertAdjacentHTML('beforeend', "#{helloFunc("Erik")}<br>")
+#
+# getRandNum = ->
+#    return Math.floor(Math.random() *100) + 1
+# csOutput.insertAdjacentHTML('beforeend', "Random number: #{getRandNum()}<br>")
+#
+# sumNums = (vars...) ->
+#    sum = 0
+#    for x in vars
+#       sum += x
+#    return sum
+# csOutput.insertAdjacentHTML('beforeend', "Sum: #{sumNums(1,2,3,4,5)}<br>")
+#
+# movieRank = (stars = 1) ->
+#    if stars <=2
+#       "Bad"
+#    else
+#       "Good"
+# csOutput.insertAdjacentHTML('beforeend', "Movie Rank: #{movieRank(4)}<br>")
+#
+#
+# factorial = (x) ->
+#    return 0 if x < 0
+#    return 1 if x == 0 or x == 1
+#    return x * factorial(x-1)
+# csOutput.insertAdjacentHTML('beforeend', "Factorial of 4: #{factorial(4)}<br>")
 
-getRandNum = ->
-   return Math.floor(Math.random() *100) + 1
-csOutput.insertAdjacentHTML('beforeend', "Random number: #{getRandNum()}<br>")
 
-sumNums = (vars...) ->
-   sum = 0
-   for x in vars
-      sum += x
-   return sum
-csOutput.insertAdjacentHTML('beforeend', "Sum: #{sumNums(1,2,3,4,5)}<br>")
 
-movieRank = (stars = 1) ->
-   if stars <=2
-      "Bad"
+# Objects
+
+# erik = {name: "Erik", age: "29", street: "123 Main Street"}
+#
+# csOutput.insertAdjacentHTML('beforeend', "#{erik.name}<br>")
+#
+# erik.state = "Colorado"
+#
+# for x, y of erik
+#    csOutput.insertAdjacentHTML('beforeend', x + " is " + y + "<br>")
+#
+
+class Animal
+   name: "No Name"
+   height: 0
+   weight: 0
+   sound: "no Sound"
+
+   @numOfAnimals: 0
+
+   @getNumOfAnimals: () ->
+      Animal.numOfAnimals
+
+   constructor: (name = "No Name", @height = 0, @weight = 0) ->
+
+      @name = name
+
+      Animal.numOfAnimals++
+
+   makeSound: ->
+      "says #{@sound}"
+
+   getInfo: ->
+      "#{@name} is #{@weight} cm and weighs #{@height} kg and #{@makeSound()}"
+
+grover = new Animal()
+
+grover.name = "Grover"
+grover.height = 60
+grover.weight = 35
+grover.sound = "Woof"
+
+csOutput.insertAdjacentHTML('beforeend', "#{grover.getInfo()}<br>")
+
+Animal::isItBig = ->
+   if @height >= 45
+      "Yes"
    else
-      "Good"
-csOutput.insertAdjacentHTML('beforeend', "Movie Rank: #{movieRank(4)}<br>")
+      "No"
+csOutput.insertAdjacentHTML('beforeend', "Is Grover Big: #{grover.isItBig()}<br>")
 
+csOutput.insertAdjacentHTML('beforeend', "number of animals #{Animal.getNumOfAnimals()}<br>")
 
-factorial = (x) ->
-   return 0 if x < 0
-   return 1 if x == 0 or x == 1
-   return x * factorial(x-1)
-csOutput.insertAdjacentHTML('beforeend', "Factorial of 4: #{factorial(4)}<br>")
+class Dog extends Animal
+   sound2: "No Sound"
+
+   constructor: (name= "No Name", height = 0, weight = 0) ->
+      super(name, height, weight)
+
+   makeSound: ->
+      super + " and #{@sound2}"
+
+sparky = new Dog("Sparky")
+
+sparky.sound = "Wooooooof"
+sparky.sound2 = "Grrrrrr"
+
+csOutput.insertAdjacentHTML('beforeend', "#{sparky.getInfo()}<br>")
