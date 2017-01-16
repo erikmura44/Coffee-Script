@@ -221,3 +221,32 @@ csOutput = document.getElementById("csoutput")
 
 
 # Funtions
+
+helloFunc = (name) ->
+   return "Hello #{name}"
+csOutput.insertAdjacentHTML('beforeend', "#{helloFunc("Erik")}<br>")
+
+getRandNum = ->
+   return Math.floor(Math.random() *100) + 1
+csOutput.insertAdjacentHTML('beforeend', "Random number: #{getRandNum()}<br>")
+
+sumNums = (vars...) ->
+   sum = 0
+   for x in vars
+      sum += x
+   return sum
+csOutput.insertAdjacentHTML('beforeend', "Sum: #{sumNums(1,2,3,4,5)}<br>")
+
+movieRank = (stars = 1) ->
+   if stars <=2
+      "Bad"
+   else
+      "Good"
+csOutput.insertAdjacentHTML('beforeend', "Movie Rank: #{movieRank(4)}<br>")
+
+
+factorial = (x) ->
+   return 0 if x < 0
+   return 1 if x == 0 or x == 1
+   return x * factorial(x-1)
+csOutput.insertAdjacentHTML('beforeend', "Factorial of 4: #{factorial(4)}<br>")
